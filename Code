@@ -1,0 +1,34 @@
+x = [5 4 6 5 5 5 6 6 2 7 7]
+y = [85 103 70 82 89 98 66 95 169 70 48]
+scatter(x,y)
+grid on 
+hold on
+xlim([1 8])
+
+for i = 1:size(x,2)
+    xy(i) = x(i)*y(i);
+end
+
+n = size(x,2);
+
+x2 = x.^2;
+y2 = y.^2;
+X = sum(x);
+Y = sum(y);
+
+Sigma_xy = sum(xy);
+Sxy = (Sigma_xy - ((X*Y)/n))/(n-1);
+Sx = (sum(x2) - ((X^2)/n))/(n-1);
+Sx = sqrt(Sx);
+Sy = (sum(y2) - ((Y^2)/n))/(n-1);
+Sy = sqrt(Sy);
+r = Sxy/(Sx*Sy)
+
+b = r*(Sy/Sx);
+a = mean(y) - b*mean(x);
+
+for i = 1:6
+    LinearY(i) = a + b*(i+1);
+end
+LinearX = 2:7;
+plot(LinearX,LinearY);
