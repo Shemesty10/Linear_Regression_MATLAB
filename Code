@@ -1,9 +1,30 @@
-x = [5 4 6 5 5 5 6 6 2 7 7]
-y = [85 103 70 82 89 98 66 95 169 70 48]
+% Input Data x
+x = [  303.1500
+  325.0000
+  350.0000
+  400.0000
+  450.0000
+  500.0000
+  550.0000
+  600.0000
+  650.0000
+  700.0000]';
+
+% Input Data y
+y = 1.0e+03*[ 2.7437
+    2.8584
+    2.9583
+    3.1194
+    3.2585
+    3.3878
+    3.5122
+    3.6343
+    3.7554
+    3.8763]';
+
 scatter(x,y)
 grid on 
 hold on
-xlim([1 8])
 
 for i = 1:size(x,2)
     xy(i) = x(i)*y(i);
@@ -24,11 +45,13 @@ Sy = (sum(y2) - ((Y^2)/n))/(n-1);
 Sy = sqrt(Sy);
 r = Sxy/(Sx*Sy)
 
-b = r*(Sy/Sx);
-a = mean(y) - b*mean(x);
+b = r*(Sy/Sx)
+a = mean(y) - b*mean(x)
 
-for i = 1:6
-    LinearY(i) = a + b*(i+1);
+LinearX = linspace(x(1),size(x,2),100) %100 means you create line with 100 point
+
+for i = 1:size(LinearX,2)
+    LinearY(i) = a + b*LinearX(i);
 end
-LinearX = 2:7;
+
 plot(LinearX,LinearY);
